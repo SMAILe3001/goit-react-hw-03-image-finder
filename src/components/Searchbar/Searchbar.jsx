@@ -13,8 +13,8 @@ export class Searchbar extends Component {
 
   handelInputSubmit = e => {
     e.preventDefault();
-
     const { searchText } = this.state;
+
     this.props.onSubmit(searchText);
 
     this.resetForm();

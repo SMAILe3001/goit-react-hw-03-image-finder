@@ -13,7 +13,7 @@ export async function fetchPictures(inputValue = 'flower', page = 1) {
       },
     });
 
-    return response.data.hits;
+    return response.data;
   } catch (err) {
     throw new Error(err.message);
   }

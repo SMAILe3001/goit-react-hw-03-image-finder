@@ -4,7 +4,7 @@ export function ImageGalleryItem({ images }) {
   return (
     <>
       {images.map(({ id, previewURL, tags }) => (
-        <li className={CSS.imageGalleryItem} key={id}>
+        <li className={CSS.imageGalleryItem} key={id} onClick={() => {}}>
           <img
             className={CSS.imageGalleryItemImage}
             src={previewURL}
