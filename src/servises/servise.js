@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { BASE_URL, API_KEY } from './api';
-import { baseSearchParams } from './params';
+
+const baseSearchParams = {
+  per_page: 12,
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+};
 
 export async function fetchPictures(inputValue = 'flower', page = 1) {
   try {
