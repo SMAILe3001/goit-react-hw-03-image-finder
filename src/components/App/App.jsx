@@ -1,18 +1,20 @@
 import { Component } from 'react';
-
 import CSS from './App.module.css';
 import { Searchbar } from 'components/Searchbar';
 import { ImageGallery } from 'components/ImageGallery';
 import { fetchPictures } from 'servises/servise';
+import { Modal } from 'components/Modal';
 
 export class App extends Component {
   state = {
     pictures: [],
     isLoading: false,
     error: false,
-    page: 1,
     search: '',
     total: NaN,
+    showModal: false,
+    bigImages: '',
+    alt: '',
   };
 
   searchPictures = async values => {
@@ -51,17 +53,40 @@ export class App extends Component {
     }
   };
 
+  toggleModal = () => {
+    this.setState(prevStata => ({ showModal: !prevStata.showModal }));
+  };
+
+  contentModal = (url, alt) => {
+    this.setState({
+      bigImages: url,
+      alt,
+    });
+  };
+
   render() {
-    const { isLoading, pictures, error, total } = this.state;
+    const { isLoading, pictures, error, total, showModal, bigImages, alt } =
+      this.state;
+    const { searchPictures, nextPagePictures, toggleModal, contentModal } =
+      this;
+
     return (
       <div className={CSS.App}>
-        <Searchbar onSubmit={this.searchPictures} isLoading={isLoading} />
+        <Searchbar onSubmit={searchPictures} isLoading={isLoading} />
         <ImageGallery
           pistures={pictures}
           totalHits={total}
-          onClick={this.nextPagePictures}
+          onClick={nextPagePictures}
           isLoading={isLoading}
+          toggleModal={toggleModal}
+          contentModal={contentModal}
         />
+
+        {showModal && (
+          <Modal onClose={toggleModal}>
+            <img src={bigImages} alt={alt} />
+          </Modal>
+        )}
         {error && <div>Походу щось зламалося</div>}
       </div>
     );

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Dna } from 'react-loader-spinner';
 import CSS from './Loader.module.css';
 
@@ -15,3 +16,7 @@ export function Loader({ visible }) {
     </div>
   );
 }
+
+Loader.propType = {
+  visible: PropTypes.bool,
+};
